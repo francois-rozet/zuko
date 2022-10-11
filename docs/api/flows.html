@@ -1,0 +1,646 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="backfire.nn" href="nn.html" /><link rel="prev" title="backfire.distributions" href="distributions.html" />
+
+    <link rel="shortcut icon" href="../_static/logo_dark.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
+        <title>backfire.flows - Backfire</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --color-api-keyword: #007020;
+  --color-api-name: #0e84b5;
+  --color-api-pre-name: #0e84b5;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  --color-api-keyword: #66d9ef;
+  --color-api-name: #a6e22e;
+  --color-api-pre-name: #a6e22e;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  --color-api-keyword: #66d9ef;
+  --color-api-name: #a6e22e;
+  --color-api-pre-name: #a6e22e;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Backfire</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/logo.svg" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/logo_dark.svg" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">backfire</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="distributions.html">backfire.distributions</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">backfire.flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nn.html">backfire.nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">backfire.transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">backfire.utils</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/CONTRIBUTING.md">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/releases">Changelog</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/LICENSE">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-backfire.flows">
+<span id="backfire-flows"></span><h1>backfire.flows<a class="headerlink" href="#module-backfire.flows" title="Permalink to this heading">#</a></h1>
+<p>Parameterized flows and autoregressive transformations.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.DistributionModule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">DistributionModule</span></span><a class="headerlink" href="#backfire.flows.DistributionModule" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L17-L30"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Abstract distribution module.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="backfire.flows.DistributionModule.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.DistributionModule.forward" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L20-L30"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em>) – A context <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A distribution <span class="math notranslate nohighlight">\(p(x | y)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.TransformModule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">TransformModule</span></span><a class="headerlink" href="#backfire.flows.TransformModule" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L33-L46"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Abstract transform module.</p>
+<dl class="field-list simple">
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="backfire.flows.TransformModule.forward">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.TransformModule.forward" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L36-L46"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em>) – A context <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A transform <span class="math notranslate nohighlight">\(z = f(x | y)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.12)"><em>Transform</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.FlowModule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">FlowModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.FlowModule" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L49-L83"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a normalizing flow module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>transforms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><em>List</em></a><em>[</em><a class="reference internal" href="#backfire.flows.TransformModule" title="backfire.flows.TransformModule"><em>TransformModule</em></a><em>]</em>) – A list of transform modules.</p></li>
+<li><p><strong>base</strong> (<a class="reference internal" href="#backfire.flows.DistributionModule" title="backfire.flows.DistributionModule"><em>DistributionModule</em></a>) – A distribution module.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="backfire.flows.FlowModule.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.FlowModule.forward" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L67-L83"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em>) – A context <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A normalizing flow <span class="math notranslate nohighlight">\(p(x | y)\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="distributions.html#backfire.distributions.NormalizingFlow" title="backfire.distributions.NormalizingFlow"><em>NormalizingFlow</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.Unconditional">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">Unconditional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.Unconditional" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L86-L124"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a module that registers the positional arguments of a function.
+The function is evaluated during the forward pass and the result is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meta</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><em>...</em><em>]</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a><em>]</em>) – An arbitrary function.</p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The positional tensor arguments passed to <code class="code highlight python docutils literal highlight-python"><span class="n">meta</span></code>.</p></li>
+<li><p><strong>buffer</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether tensors are registered as buffer or parameter.</p></li>
+<li><p><strong>kwargs</strong> – The keyword arguments passed to <code class="code highlight python docutils literal highlight-python"><span class="n">meta</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.MAF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">MAF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randperm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.MAF" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L127-L223"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a masked autoregressive flow (MAF).</p>
+<p class="rubric">References</p>
+<p>Masked Autoregressive Flow for Density Estimation
+(Papamakarios et al., 2017)
+<a class="reference external" href="https://arxiv.org/abs/1705.07057">https://arxiv.org/abs/1705.07057</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>transforms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of autoregressive transforms.</p></li>
+<li><p><strong>randperm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether features are randomly permuted between transforms or not.
+If <code class="code highlight python docutils literal highlight-python"><span class="kc">False</span></code>, features are in ascending (descending) order for even
+(odd) transforms.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#backfire.flows.MaskedAutoregressiveTransform" title="backfire.flows.MaskedAutoregressiveTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaskedAutoregressiveTransform</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">flow</span> <span class="o">=</span> <span class="n">MAF</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flow</span>
+<span class="go">MAF(</span>
+<span class="go">  (transforms): ModuleList(</span>
+<span class="go">    (0): MaskedAutoregressiveTransform(</span>
+<span class="go">      (base): MonotonicAffineTransform()</span>
+<span class="go">      (order): [0, 1, 2]</span>
+<span class="go">      (hyper): MaskedMLP(</span>
+<span class="go">        (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">        (1): ReLU()</span>
+<span class="go">        (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">        (3): ReLU()</span>
+<span class="go">        (4): MaskedLinear(in_features=64, out_features=6, bias=True)</span>
+<span class="go">      )</span>
+<span class="go">    )</span>
+<span class="go">    (1): MaskedAutoregressiveTransform(</span>
+<span class="go">      (base): MonotonicAffineTransform()</span>
+<span class="go">      (order): [2, 1, 0]</span>
+<span class="go">      (hyper): MaskedMLP(</span>
+<span class="go">        (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">        (1): ReLU()</span>
+<span class="go">        (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">        (3): ReLU()</span>
+<span class="go">        (4): MaskedLinear(in_features=64, out_features=6, bias=True)</span>
+<span class="go">      )</span>
+<span class="go">    )</span>
+<span class="go">    (2): MaskedAutoregressiveTransform(</span>
+<span class="go">      (base): MonotonicAffineTransform()</span>
+<span class="go">      (order): [0, 1, 2]</span>
+<span class="go">      (hyper): MaskedMLP(</span>
+<span class="go">        (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">        (1): ReLU()</span>
+<span class="go">        (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">        (3): ReLU()</span>
+<span class="go">        (4): MaskedLinear(in_features=64, out_features=6, bias=True)</span>
+<span class="go">      )</span>
+<span class="go">    )</span>
+<span class="go">  )</span>
+<span class="go">  (base): DiagNormal(loc: torch.Size([3]), scale: torch.Size([3]))</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">flow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">tensor([-1.7154, -0.4401,  0.7505])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">tensor(-4.4630, grad_fn=&lt;AddBackward0&gt;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.NSF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">NSF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.NSF" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L226-L260"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a neural spline flow (NSF).</p>
+<p class="rubric">References</p>
+<p>Neural Spline Flows
+(Durkan et al., 2019)
+<a class="reference external" href="https://arxiv.org/abs/1906.04032">https://arxiv.org/abs/1906.04032</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of bins <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#backfire.flows.MAF" title="backfire.flows.MAF"><code class="xref py py-class docutils literal notranslate"><span class="pre">MAF</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.NAF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">NAF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transforms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randperm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unconstrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.NAF" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L263-L325"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a neural autoregressive flow (NAF).</p>
+<p class="rubric">References</p>
+<p>Neural Autoregressive Flows
+(Huang et al., 2018)
+<a class="reference external" href="https://arxiv.org/abs/1804.00779">https://arxiv.org/abs/1804.00779</a></p>
+<p>Unconstrained Monotonic Neural Networks
+(Wehenkel et al., 2019)
+<a class="reference external" href="https://arxiv.org/abs/1908.05164">https://arxiv.org/abs/1908.05164</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>transforms</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of autoregressive transforms.</p></li>
+<li><p><strong>randperm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether features are randomly permuted between transforms or not.
+If <code class="code highlight python docutils literal highlight-python"><span class="kc">False</span></code>, features are in ascending (descending) order for even
+(odd) transforms.</p></li>
+<li><p><strong>unconstrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to use unconstrained or regular monotonic networks.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#backfire.flows.NeuralAutoregressiveTransform" title="backfire.flows.NeuralAutoregressiveTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">NeuralAutoregressiveTransform</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.MaskedAutoregressiveTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">MaskedAutoregressiveTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">univariate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shapes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(),</span> <span class="pre">()]</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.MaskedAutoregressiveTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L328-L426"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a masked autoregressive transform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>passes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of passes for the inverse transformation. If <code class="code highlight python docutils literal highlight-python"><span class="kc">None</span></code>,
+use the number of features instead.</p></li>
+<li><p><strong>order</strong> (<em>LongTensor</em>) – The feature ordering. If <code class="code highlight python docutils literal highlight-python"><span class="kc">None</span></code>, use <code class="code highlight python docutils literal highlight-python"><span class="nb">range</span><span class="p">(</span><span class="n">features</span><span class="p">)</span></code> instead.</p></li>
+<li><p><strong>univariate</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><em>...</em><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.12)"><em>Transform</em></a><em>]</em>) – A univariate transformation constructor. If <code class="code highlight python docutils literal highlight-python"><span class="kc">None</span></code>, use
+<a class="reference internal" href="transforms.html#backfire.transforms.MonotonicAffineTransform" title="backfire.transforms.MonotonicAffineTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">backfire.transforms.MonotonicAffineTransform</span></code></a> instead.</p></li>
+<li><p><strong>shapes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><em>List</em></a><em>[</em><em>Size</em><em>]</em>) – The shapes of the univariate transformation parameters.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="nn.html#backfire.nn.MaskedMLP" title="backfire.nn.MaskedMLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">backfire.nn.MaskedMLP</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">MaskedAutoregressiveTransform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">MaskedAutoregressiveTransform(</span>
+<span class="go">  (base): MonotonicAffineTransform()</span>
+<span class="go">  (order): [0, 1, 2]</span>
+<span class="go">  (hyper): MaskedMLP(</span>
+<span class="go">    (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">    (1): ReLU()</span>
+<span class="go">    (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">    (3): ReLU()</span>
+<span class="go">    (4): MaskedLinear(in_features=64, out_features=6, bias=True)</span>
+<span class="go">  )</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">tensor([-0.9485,  1.5290,  0.2018])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">tensor([-0.9485,  1.5290,  0.2018])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.NeuralAutoregressiveTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">NeuralAutoregressiveTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.NeuralAutoregressiveTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L429-L498"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a neural autoregressive transform.</p>
+<p>The monotonic neural network is parametrized by its internal positive weights,
+which are independent of the features and context. To modulate its behavior, it
+receives as input a signal that is autoregressively dependent on the features
+and context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>signal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of signal features of the monotonic network.</p></li>
+<li><p><strong>network</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a><em>]</em>) – Keyword arguments passed to <a class="reference internal" href="nn.html#backfire.nn.MonotonicMLP" title="backfire.nn.MonotonicMLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">backfire.nn.MonotonicMLP</span></code></a>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#backfire.flows.MaskedAutoregressiveTransform" title="backfire.flows.MaskedAutoregressiveTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaskedAutoregressiveTransform</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">NeuralAutoregressiveTransform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">NeuralAutoregressiveTransform(</span>
+<span class="go">  (base): MonotonicTransform()</span>
+<span class="go">  (order): [0, 1, 2]</span>
+<span class="go">  (hyper): MaskedMLP(</span>
+<span class="go">    (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">    (1): ReLU()</span>
+<span class="go">    (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">    (3): ReLU()</span>
+<span class="go">    (4): MaskedLinear(in_features=64, out_features=24, bias=True)</span>
+<span class="go">  )</span>
+<span class="go">  (network): MonotonicMLP(</span>
+<span class="go">    (0): MonotonicLinear(in_features=9, out_features=64, bias=True)</span>
+<span class="go">    (1): TwoWayELU(alpha=1.0)</span>
+<span class="go">    (2): MonotonicLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">    (3): TwoWayELU(alpha=1.0)</span>
+<span class="go">    (4): MonotonicLinear(in_features=64, out_features=1, bias=True)</span>
+<span class="go">  )</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">tensor([-2.3267,  1.4581, -1.6776])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">tensor([-2.3267,  1.4581, -1.6776])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="backfire.flows.UnconstrainedNeuralAutoregressiveTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">backfire.flows.</span></span><span class="sig-name descname"><span class="pre">UnconstrainedNeuralAutoregressiveTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">network</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#backfire.flows.UnconstrainedNeuralAutoregressiveTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/backfire/tree/docs/backfire/flows.py#L501-L577"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates an unconstrained neural autoregressive transform.</p>
+<p>The integrand neural network is parametrized by its internal weights, which are
+independent of the features and context. To modulate its behavior, it receives as
+input a signal that is autoregressively dependent on the features and context. The
+integration constant has the same dependencies as the signal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of features.</p></li>
+<li><p><strong>context</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of context features.</p></li>
+<li><p><strong>signal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of signal features of the integrand network.</p></li>
+<li><p><strong>network</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><em>Dict</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.10)"><em>Any</em></a><em>]</em>) – Keyword arguments passed to <a class="reference internal" href="nn.html#backfire.nn.MLP" title="backfire.nn.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">backfire.nn.MLP</span></code></a>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#backfire.flows.MaskedAutoregressiveTransform" title="backfire.flows.MaskedAutoregressiveTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">MaskedAutoregressiveTransform</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">UnconstrainedNeuralAutoregressiveTransform</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go">UnconstrainedNeuralAutoregressiveTransform(</span>
+<span class="go">  (base): UnconstrainedMonotonicTransform()</span>
+<span class="go">  (order): [0, 1, 2]</span>
+<span class="go">  (hyper): MaskedMLP(</span>
+<span class="go">    (0): MaskedLinear(in_features=7, out_features=64, bias=True)</span>
+<span class="go">    (1): ReLU()</span>
+<span class="go">    (2): MaskedLinear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">    (3): ReLU()</span>
+<span class="go">    (4): MaskedLinear(in_features=64, out_features=27, bias=True)</span>
+<span class="go">  )</span>
+<span class="go">  (integrand): MLP(</span>
+<span class="go">    (0): Linear(in_features=9, out_features=64, bias=True)</span>
+<span class="go">    (1): ELU(alpha=1.0)</span>
+<span class="go">    (2): Linear(in_features=64, out_features=64, bias=True)</span>
+<span class="go">    (3): ELU(alpha=1.0)</span>
+<span class="go">    (4): Linear(in_features=64, out_features=1, bias=True)</span>
+<span class="go">    (5): Softplus(beta=1, threshold=20)</span>
+<span class="go">  )</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span>
+<span class="go">tensor([-0.0103, -1.0871, -0.0667])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">tensor([-0.0103, -1.0871, -0.0667])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="nn.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">backfire.nn</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="distributions.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">backfire.distributions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, François Rozet
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and 
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/francois-rozet/backfire" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
