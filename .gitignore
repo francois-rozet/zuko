@@ -5,9 +5,6 @@
 # macOS
 .DS_Store
 
-# Docs
-docs/
-
 
 ##########
 # Python #
