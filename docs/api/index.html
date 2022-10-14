@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="backfire.distributions" href="distributions.html" /><link rel="prev" title="Backfire" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="zuko.distributions" href="zuko.distributions.html" /><link rel="prev" title="Zuko" href="../index.html" />
 
-    <link rel="shortcut icon" href="../_static/logo_dark.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
-        <title>API - Backfire</title>
+    <link rel="shortcut icon" href="../_static/logo.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
+        <title>API - Zuko</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">Backfire</div></a>
+      <a href="../index.html"><div class="brand">Zuko</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -154,11 +154,10 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo only-light" src="../_static/logo.svg" alt="Light Logo"/>
-    <img class="sidebar-logo only-dark" src="../_static/logo_dark.svg" alt="Dark Logo"/>
+    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
   </div>
   
   
@@ -168,22 +167,22 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">backfire</span></p>
+  <p class="caption" role="heading"><span class="caption-text">zuko</span></p>
 <ul class="current">
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="distributions.html">backfire.distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="flows.html">backfire.flows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nn.html">backfire.nn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="transforms.html">backfire.transforms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">backfire.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.distributions.html">zuko.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.flows.html">zuko.flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.nn.html">zuko.nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.transforms.html">zuko.transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.utils.html">zuko.utils</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/CONTRIBUTING.md">Contributing</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/releases">Changelog</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/LICENSE">License</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/CONTRIBUTING.md">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/releases">Changelog</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/LICENSE">License</a></li>
 </ul>
 
 </div>
@@ -217,16 +216,32 @@
           </label>
         </div>
         <article role="main">
-          <section id="api">
-<h1>API<a class="headerlink" href="#api" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="distributions.html">backfire.distributions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flows.html">backfire.flows</a></li>
-<li class="toctree-l1"><a class="reference internal" href="nn.html">backfire.nn</a></li>
-<li class="toctree-l1"><a class="reference internal" href="transforms.html">backfire.transforms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">backfire.utils</a></li>
-</ul>
+          <section id="module-zuko">
+<span id="api"></span><h1>API<a class="headerlink" href="#module-zuko" title="Permalink to this heading">#</a></h1>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="zuko.distributions.html#module-zuko.distributions" title="zuko.distributions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zuko.distributions</span></code></a></p></td>
+<td><p>Parametrizable probability distributions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="zuko.flows.html#module-zuko.flows" title="zuko.flows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zuko.flows</span></code></a></p></td>
+<td><p>Parameterized flows and autoregressive transformations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="zuko.nn.html#module-zuko.nn" title="zuko.nn"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zuko.nn</span></code></a></p></td>
+<td><p>Neural networks, layers and modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="zuko.transforms.html#module-zuko.transforms" title="zuko.transforms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zuko.transforms</span></code></a></p></td>
+<td><p>Parameterizable transformations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="zuko.utils.html#module-zuko.utils" title="zuko.utils"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zuko.utils</span></code></a></p></td>
+<td><p>General purpose helpers.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
 
@@ -235,12 +250,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="distributions.html">
+          <a class="next-page" href="zuko.distributions.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">backfire.distributions</div>
+                <div class="title">zuko.distributions</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -268,7 +283,7 @@
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link " href="https://github.com/francois-rozet/backfire" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+              <a class="muted-link " href="https://github.com/francois-rozet/zuko" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
               
             </div>
           </div>

@@ -5,8 +5,8 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API" href="api/index.html" />
 
-    <link rel="shortcut icon" href="_static/logo_dark.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
-        <title>Backfire</title>
+    <link rel="shortcut icon" href="_static/logo.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
+        <title>Zuko</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -134,7 +134,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">Backfire</div></a>
+      <a href="#"><div class="brand">Zuko</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -154,11 +154,10 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="#">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo only-light" src="_static/logo.svg" alt="Light Logo"/>
-    <img class="sidebar-logo only-dark" src="_static/logo_dark.svg" alt="Dark Logo"/>
+    <img class="sidebar-logo" src="_static/logo.svg" alt="Logo"/>
   </div>
   
   
@@ -168,22 +167,22 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">backfire</span></p>
+  <p class="caption" role="heading"><span class="caption-text">zuko</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="api/index.html">API</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/distributions.html">backfire.distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/flows.html">backfire.flows</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/nn.html">backfire.nn</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/transforms.html">backfire.transforms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/utils.html">backfire.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/zuko.distributions.html">zuko.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/zuko.flows.html">zuko.flows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/zuko.nn.html">zuko.nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/zuko.transforms.html">zuko.transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/zuko.utils.html">zuko.utils</a></li>
 </ul>
 </li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Development</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/CONTRIBUTING.md">Contributing</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/releases">Changelog</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/backfire/blob/master/LICENSE">License</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/CONTRIBUTING.md">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/releases">Changelog</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/LICENSE">License</a></li>
 </ul>
 
 </div>
@@ -217,29 +216,59 @@
           </label>
         </div>
         <article role="main">
-          <section id="backfire">
-<h1>Backfire<a class="headerlink" href="#backfire" title="Permalink to this heading">#</a></h1>
-<p>Normalizing flows in PyTorch</p>
+          <img alt="_images/banner.svg" class="only-light" src="_images/banner.svg" /><img alt="_images/banner_dark.svg" class="only-dark" src="_images/banner_dark.svg" /><section id="zuko">
+<h1>Zuko<a class="headerlink" href="#zuko" title="Permalink to this heading">#</a></h1>
+<p>Zuko is a Python package that implements normalizing flows in PyTorch. It relies as much as possible on distributions and transformations already provided by PyTorch. Unfortunately, the <code class="docutils literal notranslate"><span class="pre">Distribution</span></code> and <code class="docutils literal notranslate"><span class="pre">Transform</span></code> classes of <a class="reference external" href="https://pytorch.org/docs/stable/torch.html#module-torch" title="(in PyTorch v1.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch</span></code></a> are not sub-classes of <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" title="(in PyTorch v1.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a>, which means you cannot send their internal tensors to GPU with <code class="code highlight python docutils literal highlight-python"><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span></code> or retrieve their parameters with <code class="code highlight python docutils literal highlight-python"><span class="o">.</span><span class="n">parameters</span><span class="p">()</span></code>.</p>
+<p>To solve this problem, <a class="reference internal" href="api/index.html#module-zuko" title="zuko"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zuko</span></code></a> defines two abstract classes: <a class="reference internal" href="api/zuko.flows.html#zuko.flows.DistributionModule" title="zuko.flows.DistributionModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">zuko.flows.DistributionModule</span></code></a> and <a class="reference internal" href="api/zuko.flows.html#zuko.flows.TransformModule" title="zuko.flows.TransformModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">zuko.flows.TransformModule</span></code></a>. The former is any <code class="docutils literal notranslate"><span class="pre">Module</span></code> whose forward pass returns a <code class="docutils literal notranslate"><span class="pre">Distribution</span></code> and the latter is any <code class="docutils literal notranslate"><span class="pre">Module</span></code> whose forward pass returns a <code class="docutils literal notranslate"><span class="pre">Transform</span></code>. Then, a normalizing flow is the composition of a list of <code class="docutils literal notranslate"><span class="pre">TransformModule</span></code> and a base <code class="docutils literal notranslate"><span class="pre">DistributionModule</span></code>. This design allows for flows that behave like distributions while retaining the benefits of <code class="docutils literal notranslate"><span class="pre">Module</span></code>. It also makes the implementations easy to understand and extend.</p>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h2>
-<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">backfire</span></code> package is available on <a class="reference external" href="https://pypi.org/project/backfire">PyPI</a>, which means it is installable via <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install backfire</span>
+<p>The <a class="reference internal" href="api/index.html#module-zuko" title="zuko"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zuko</span></code></a> package is available on <a class="reference external" href="https://pypi.org/project/zuko">PyPI</a>, which means it is installable via <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install zuko</span>
 </pre></div>
 </div>
 <p>Alternatively, if you need the latest features, you can install it from the repository.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install git+https://github.com/francois-rozet/backfire</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip install git+https://github.com/francois-rozet/zuko</span>
 </pre></div>
 </div>
 </section>
-<section id="normalizing-flows">
-<h2>Normalizing flows<a class="headerlink" href="#normalizing-flows" title="Permalink to this heading">#</a></h2>
-<p>TODO</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h2>
+<p>Normalizing flows are provided in the <a class="reference internal" href="api/zuko.flows.html#module-zuko.flows" title="zuko.flows"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zuko.flows</span></code></a> module. To build one, supply the number of sample and context features as well as the transformations’ hyperparameters. Then, feeding a context <span class="math notranslate nohighlight">\(y\)</span> to the flow returns a conditional distribution <span class="math notranslate nohighlight">\(p(x | y)\)</span> which can be evaluated and sampled from.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">zuko</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># Neural spline flow (NSF) with 3 transformations</span>
+<span class="n">flow</span> <span class="o">=</span> <span class="n">zuko</span><span class="o">.</span><span class="n">flows</span><span class="o">.</span><span class="n">NSF</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">transforms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">hidden_features</span><span class="o">=</span><span class="p">[</span><span class="mi">128</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Evaluate log p(x | y)</span>
+<span class="n">log_p</span> <span class="o">=</span> <span class="n">flow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Sample 64 points x ~ p(x | y)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">flow</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="mi">64</span><span class="p">,))</span>
+</pre></div>
+</div>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
-<p>Normalizing Flows for Probabilistic Modeling and Inference
-(Papamakarios et al., 2021)
-<a class="reference external" href="https://arxiv.org/abs/1912.02762">https://arxiv.org/abs/1912.02762</a></p>
+<div class="line-block">
+<div class="line">Normalizing Flows for Probabilistic Modeling and Inference (Papamakarios et al., 2021)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1912.02762">https://arxiv.org/abs/1912.02762</a></div>
+</div>
+<div class="line-block">
+<div class="line">Masked Autoregressive Flow for Density Estimation (Papamakarios et al., 2017)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1705.07057">https://arxiv.org/abs/1705.07057</a></div>
+</div>
+<div class="line-block">
+<div class="line">Neural Spline Flows (Durkan et al., 2019)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1906.04032">https://arxiv.org/abs/1906.04032</a></div>
+</div>
+<div class="line-block">
+<div class="line">Neural Autoregressive Flows (Huang et al., 2018)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1804.00779">https://arxiv.org/abs/1804.00779</a></div>
+</div>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
@@ -275,7 +304,7 @@
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link " href="https://github.com/francois-rozet/backfire" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+              <a class="muted-link " href="https://github.com/francois-rozet/zuko" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
               
             </div>
           </div>
@@ -295,9 +324,9 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Backfire</a><ul>
+<li><a class="reference internal" href="#">Zuko</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#normalizing-flows">Normalizing flows</a></li>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
 <li><a class="reference internal" href="#references">References</a><ul>
 </ul>
 </li>
@@ -318,5 +347,6 @@
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

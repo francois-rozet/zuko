@@ -1,0 +1,448 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="zuko.transforms" href="zuko.transforms.html" /><link rel="prev" title="zuko.flows" href="zuko.flows.html" />
+
+    <link rel="shortcut icon" href="../_static/logo.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
+        <title>zuko.nn - Zuko</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=40978830699223671f4072448e654b5958f38b89" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  --color-api-keyword: #007020;
+  --color-api-name: #0e84b5;
+  --color-api-pre-name: #0e84b5;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  --color-api-keyword: #66d9ef;
+  --color-api-name: #a6e22e;
+  --color-api-pre-name: #a6e22e;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  --color-api-keyword: #66d9ef;
+  --color-api-name: #a6e22e;
+  --color-api-pre-name: #a6e22e;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Zuko</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand centered" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/logo.svg" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder=Search name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">zuko</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="zuko.distributions.html">zuko.distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.flows.html">zuko.flows</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">zuko.nn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.transforms.html">zuko.transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zuko.utils.html">zuko.utils</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/CONTRIBUTING.md">Contributing</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/releases">Changelog</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/francois-rozet/zuko/blob/master/LICENSE">License</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-zuko.nn">
+<span id="zuko-nn"></span><h1>zuko.nn<a class="headerlink" href="#module-zuko.nn" title="Permalink to this heading">#</a></h1>
+<p>Neural networks, layers and modules.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.nn.MLP" title="zuko.nn.MLP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MLP</span></code></a></p></td>
+<td><p>Creates a multi-layer perceptron (MLP).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zuko.nn.MaskedMLP" title="zuko.nn.MaskedMLP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MaskedMLP</span></code></a></p></td>
+<td><p>Creates a masked multi-layer perceptron (MaskedMLP).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.nn.MonotonicMLP" title="zuko.nn.MonotonicMLP"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicMLP</span></code></a></p></td>
+<td><p>Creates a monotonic multi-layer perceptron (MonotonicMLP).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="descriptions">
+<h2>Descriptions<a class="headerlink" href="#descriptions" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="zuko.nn.MLP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.nn.</span></span><span class="sig-name descname"><span class="pre">MLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[64,</span> <span class="pre">64]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batchnorm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.nn.MLP" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/nn.py#L35-L108"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a multi-layer perceptron (MLP).</p>
+<p>Also known as fully connected feedforward network, an MLP is a series of
+non-linear parametric transformations</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[h_{i + 1} = a_{i + 1}(h_i W_{i + 1}^T + b_{i + 1}),\]</div>
+</div>
+<p>over feature vectors <span class="math notranslate nohighlight">\(h_i\)</span>, with the input and output feature vectors
+<span class="math notranslate nohighlight">\(x = h_0\)</span> and <span class="math notranslate nohighlight">\(y = h_L\)</span>, respectively. The non-linear functions
+<span class="math notranslate nohighlight">\(a_i\)</span> are called activation functions. The trainable parameters of an MLP
+are its weights and biases <span class="math notranslate nohighlight">\(\phi = \{W_i, b_i | i = 1, \dots, L\}\)</span>.</p>
+<p class="rubric">Wikipedia</p>
+<p><a class="reference external" href="https://wikipedia.org/wiki/Feedforward_neural_network">https://wikipedia.org/wiki/Feedforward_neural_network</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>in_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of input features.</p></li>
+<li><p><strong>out_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of output features.</p></li>
+<li><p><strong>hidden_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><em>List</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em>]</em>) – The numbers of hidden features.</p></li>
+<li><p><strong>activation</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><em>]</em><em>, </em><em>Module</em><em>]</em>) – The activation function. If <code class="code highlight python docutils literal highlight-python"><span class="kc">None</span></code>, use <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html#torch.nn.ReLU" title="(in PyTorch v1.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.ReLU</span></code></a>
+instead.</p></li>
+<li><p><strong>batchnorm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether to use batch normalization or not.</p></li>
+<li><p><strong>dropout</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The dropout rate.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html#torch.nn.Linear" title="(in PyTorch v1.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="n">activation</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">ELU</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span>
+<span class="go">MLP(</span>
+<span class="go">  (0): Linear(in_features=64, out_features=32, bias=True)</span>
+<span class="go">  (1): ELU(alpha=1.0)</span>
+<span class="go">  (2): Linear(in_features=32, out_features=16, bias=True)</span>
+<span class="go">  (3): ELU(alpha=1.0)</span>
+<span class="go">  (4): Linear(in_features=16, out_features=1, bias=True)</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="zuko.nn.MaskedMLP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.nn.</span></span><span class="sig-name descname"><span class="pre">MaskedMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">adjacency</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.nn.MaskedMLP" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/nn.py#L130-L186"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a masked multi-layer perceptron (MaskedMLP).</p>
+<p>The resulting MLP is a transformation <span class="math notranslate nohighlight">\(y = f(x)\)</span> whose Jacobian entries
+<span class="math notranslate nohighlight">\(\frac{\partial y_i}{\partial x_j}\)</span> are null if <span class="math notranslate nohighlight">\(A_{ij} = 0\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adjacency</strong> (<em>BoolTensor</em>) – The adjacency matrix <span class="math notranslate nohighlight">\(A \in \{0, 1\}^{M \times N}\)</span>.</p></li>
+<li><p><strong>args</strong> – Positional arguments passed to <a class="reference internal" href="#zuko.nn.MLP" title="zuko.nn.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></a>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#zuko.nn.MLP" title="zuko.nn.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">adjacency</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">adjacency</span>
+<span class="go">tensor([[False,  True, False],</span>
+<span class="go">        [ True, False,  True],</span>
+<span class="go">        [False,  True, False],</span>
+<span class="go">        [False,  True,  True]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">MaskedMLP</span><span class="p">(</span><span class="n">adjacency</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">],</span> <span class="n">activation</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">ELU</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span>
+<span class="go">MaskedMLP(</span>
+<span class="go">  (0): MaskedLinear(in_features=3, out_features=16, bias=True)</span>
+<span class="go">  (1): ELU(alpha=1.0)</span>
+<span class="go">  (2): MaskedLinear(in_features=16, out_features=32, bias=True)</span>
+<span class="go">  (3): ELU(alpha=1.0)</span>
+<span class="go">  (4): MaskedLinear(in_features=32, out_features=4, bias=True)</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">tensor([[ 0.0000,  0.0031,  0.0000],</span>
+<span class="go">        [-0.0323,  0.0000, -0.0547],</span>
+<span class="go">        [ 0.0000, -0.0245,  0.0000],</span>
+<span class="go">        [ 0.0000,  0.0060, -0.0063]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="zuko.nn.MonotonicMLP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.nn.</span></span><span class="sig-name descname"><span class="pre">MonotonicMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.nn.MonotonicMLP" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/nn.py#L221-L259"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a monotonic multi-layer perceptron (MonotonicMLP).</p>
+<p>The resulting MLP is a transformation <span class="math notranslate nohighlight">\(y = f(x)\)</span> whose Jacobian entries
+<span class="math notranslate nohighlight">\(\frac{\partial y_j}{\partial x_i}\)</span> are positive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – Positional arguments passed to <a class="reference internal" href="#zuko.nn.MLP" title="zuko.nn.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></a>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#zuko.nn.MLP" title="zuko.nn.MLP"><code class="xref py py-class docutils literal notranslate"><span class="pre">MLP</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">net</span> <span class="o">=</span> <span class="n">MonotonicMLP</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">net</span>
+<span class="go">MonotonicMLP(</span>
+<span class="go">  (0): MonotonicLinear(in_features=3, out_features=16, bias=True)</span>
+<span class="go">  (1): TwoWayELU(alpha=1.0)</span>
+<span class="go">  (2): MonotonicLinear(in_features=16, out_features=32, bias=True)</span>
+<span class="go">  (3): TwoWayELU(alpha=1.0)</span>
+<span class="go">  (4): MonotonicLinear(in_features=32, out_features=4, bias=True)</span>
+<span class="go">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">jacobian</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">tensor([[0.8742, 0.9439, 0.9759],</span>
+<span class="go">        [0.8969, 0.9716, 0.9866],</span>
+<span class="go">        [1.0780, 1.1651, 1.2056],</span>
+<span class="go">        [0.8596, 0.9400, 0.9502]])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="zuko.transforms.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">zuko.transforms</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="zuko.flows.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">zuko.flows</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022, François Rozet
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and 
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/francois-rozet/zuko" aria-label="GitHub"><i class="fa-brands fa-github fa-lg"></i></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">zuko.nn</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#descriptions">Descriptions</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
