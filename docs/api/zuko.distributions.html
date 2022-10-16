@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="zuko.flows" href="zuko.flows.html" /><link rel="prev" title="API" href="index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="zuko.flows" href="zuko.flows.html" /><link rel="prev" title="API" href="../api.html" />
 
     <link rel="shortcut icon" href="../_static/logo.svg"/><meta name="generator" content="sphinx-5.0.2, furo 2022.06.21"/>
         <title>zuko.distributions - Zuko</title>
@@ -169,7 +169,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">zuko</span></p>
 <ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api.html">API</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">zuko.distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zuko.flows.html">zuko.flows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="zuko.nn.html">zuko.nn</a></li>
@@ -269,7 +269,7 @@
 <h2>Descriptions<a class="headerlink" href="#descriptions" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.distributions.NormalizingFlow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.distributions.</span></span><span class="sig-name descname"><span class="pre">NormalizingFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.distributions.NormalizingFlow" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/distributions.py#L17-L65"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.distributions.</span></span><span class="sig-name descname"><span class="pre">NormalizingFlow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transforms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.distributions.NormalizingFlow" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/distributions.py#L17-L63"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a normalizing flow for a random variable <span class="math notranslate nohighlight">\(X\)</span> towards a base
 distribution <span class="math notranslate nohighlight">\(p(Z)\)</span> through a series of <span class="math notranslate nohighlight">\(n\)</span> invertible and differentiable
 transformations <span class="math notranslate nohighlight">\(f_1, f_2, \dots, f_n\)</span>.</p>
@@ -308,7 +308,7 @@ the inverse transformation <span class="math notranslate nohighlight">\(g = f^{-
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.distributions.Joint">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.distributions.</span></span><span class="sig-name descname"><span class="pre">Joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">marginals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.distributions.Joint" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/distributions.py#L68-L142"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.distributions.</span></span><span class="sig-name descname"><span class="pre">Joint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">marginals</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.distributions.Joint" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/distributions.py#L66-L142"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a distribution for a multivariate random variable <span class="math notranslate nohighlight">\(X\)</span> which
 is the concatenation of <span class="math notranslate nohighlight">\(n\)</span> independent random variables <span class="math notranslate nohighlight">\(Z_i\)</span>.</p>
 <div class="math-wrapper docutils container">
@@ -606,7 +606,7 @@ maximum among <span class="math notranslate nohighlight">\(n\)</span> draws from
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="index.html">
+          <a class="prev-page" href="../api.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
