@@ -293,8 +293,8 @@ the inverse transformation <span class="math notranslate nohighlight">\(g = f^{-
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>transforms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><em>List</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.12)"><em>Transform</em></a><em>]</em>) – A list of transformations <span class="math notranslate nohighlight">\(f_i\)</span>.</p></li>
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
+<li><p><strong>transforms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><em>List</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.13)"><em>Transform</em></a><em>]</em>) – A list of transformations <span class="math notranslate nohighlight">\(f_i\)</span>.</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -317,7 +317,7 @@ is the concatenation of <span class="math notranslate nohighlight">\(n\)</span> 
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>marginals</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A list of distributions <span class="math notranslate nohighlight">\(p(Z_i)\)</span>.</p>
+<dd class="field-odd"><p><strong>marginals</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A list of distributions <span class="math notranslate nohighlight">\(p(Z_i)\)</span>.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -342,7 +342,7 @@ is the concatenation of <span class="math notranslate nohighlight">\(n\)</span> 
 <p><a class="reference external" href="https://wikipedia.org/wiki/Generalized_normal_distribution">https://wikipedia.org/wiki/Generalized_normal_distribution</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>beta</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The shape parameter <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<dd class="field-odd"><p><strong>beta</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The shape parameter <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -362,9 +362,9 @@ correlation between the variables.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>loc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The mean <span class="math notranslate nohighlight">\(\mu\)</span> of the variables.</p></li>
-<li><p><strong>scale</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> of the variables.</p></li>
-<li><p><strong>ndims</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of batch dimensions to interpret as event dimensions.</p></li>
+<li><p><strong>loc</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The mean <span class="math notranslate nohighlight">\(\mu\)</span> of the variables.</p></li>
+<li><p><strong>scale</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> of the variables.</p></li>
+<li><p><strong>ndims</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of batch dimensions to interpret as event dimensions.</p></li>
 </ul>
 </dd>
 </dl>
@@ -392,9 +392,9 @@ of the domain in the <span class="math notranslate nohighlight">\(i\)</span>-th 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The lower bounds (inclusive).</p></li>
-<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The upper bounds (exclusive).</p></li>
-<li><p><strong>ndims</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of batch dimensions to interpret as event dimensions.</p></li>
+<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The lower bounds (inclusive).</p></li>
+<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The upper bounds (exclusive).</p></li>
+<li><p><strong>ndims</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of batch dimensions to interpret as event dimensions.</p></li>
 </ul>
 </dd>
 </dl>
@@ -425,9 +425,9 @@ transformation <span class="math notranslate nohighlight">\(f(X)\)</span> is uni
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.12)"><em>Transform</em></a>) – A transformation <span class="math notranslate nohighlight">\(f\)</span>, monotonically increasing over <span class="math notranslate nohighlight">\([l, u]\)</span>.</p></li>
-<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – A lower bound <span class="math notranslate nohighlight">\(l\)</span> (inclusive).</p></li>
-<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – An upper bound <span class="math notranslate nohighlight">\(u\)</span> (exclusive).</p></li>
+<li><p><strong>f</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.13)"><em>Transform</em></a>) – A transformation <span class="math notranslate nohighlight">\(f\)</span>, monotonically increasing over <span class="math notranslate nohighlight">\([l, u]\)</span>.</p></li>
+<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – A lower bound <span class="math notranslate nohighlight">\(l\)</span> (inclusive).</p></li>
+<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – An upper bound <span class="math notranslate nohighlight">\(u\)</span> (exclusive).</p></li>
 </ul>
 </dd>
 </dl>
@@ -455,9 +455,9 @@ transformation <span class="math notranslate nohighlight">\(f(X)\)</span> is uni
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(X)\)</span>.</p></li>
-<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – A lower bound <span class="math notranslate nohighlight">\(l\)</span> (inclusive).</p></li>
-<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – An upper bound <span class="math notranslate nohighlight">\(u\)</span> (exclusive).</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(X)\)</span>.</p></li>
+<li><p><strong>lower</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – A lower bound <span class="math notranslate nohighlight">\(l\)</span> (inclusive).</p></li>
+<li><p><strong>upper</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – An upper bound <span class="math notranslate nohighlight">\(u\)</span> (exclusive).</p></li>
 </ul>
 </dd>
 </dl>
@@ -485,9 +485,9 @@ such that <span class="math notranslate nohighlight">\(X_i \leq X_{i + 1}\)</spa
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
-<li><p><strong>descending</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Whether the elements are sorted in descending order or not.</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>descending</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Whether the elements are sorted in descending order or not.</p></li>
 </ul>
 </dd>
 </dl>
@@ -518,9 +518,9 @@ such that <span class="math notranslate nohighlight">\(X_i \leq X_{i + 1}\)</spa
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
-<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of selected elements <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of selected elements <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 <li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#zuko.distributions.Sort" title="zuko.distributions.Sort"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sort</span></code></a>.</p></li>
 </ul>
 </dd>
@@ -547,8 +547,8 @@ minimum among <span class="math notranslate nohighlight">\(n\)</span> draws from
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -574,8 +574,8 @@ maximum among <span class="math notranslate nohighlight">\(n\)</span> draws from
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.12)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p><strong>base</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.distribution.Distribution" title="(in PyTorch v1.13)"><em>Distribution</em></a>) – A base distribution <span class="math notranslate nohighlight">\(p(Z)\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of draws <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
 </ul>
 </dd>
 </dl>

@@ -234,17 +234,23 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.CosTransform" title="zuko.transforms.CosTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CosTransform</span></code></a></p></td>
 <td><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = -\cos(x)\)</span>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicAffineTransform" title="zuko.transforms.MonotonicAffineTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicAffineTransform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.IdentityTransform" title="zuko.transforms.IdentityTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IdentityTransform</span></code></a></p></td>
+<td><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicAffineTransform" title="zuko.transforms.MonotonicAffineTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicAffineTransform</span></code></a></p></td>
 <td><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = \alpha x + \beta\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicRQSTransform" title="zuko.transforms.MonotonicRQSTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicRQSTransform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicRQSTransform" title="zuko.transforms.MonotonicRQSTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicRQSTransform</span></code></a></p></td>
 <td><p>Creates a monotonic rational-quadratic spline (RQS) transformation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicTransform" title="zuko.transforms.MonotonicTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicTransform</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.MonotonicTransform" title="zuko.transforms.MonotonicTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonotonicTransform</span></code></a></p></td>
 <td><p>Creates a transformation from a monotonic univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.PermutationTransform" title="zuko.transforms.PermutationTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PermutationTransform</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.PermutationTransform" title="zuko.transforms.PermutationTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PermutationTransform</span></code></a></p></td>
 <td><p>Creates a transformation that permutes the elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zuko.transforms.SOSPolynomialTransform" title="zuko.transforms.SOSPolynomialTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SOSPolynomialTransform</span></code></a></p></td>
+<td><p>Creates a sum-of-squares (SOS) polynomial transformation.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#zuko.transforms.SinTransform" title="zuko.transforms.SinTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SinTransform</span></code></a></p></td>
 <td><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = \sin(x)\)</span>.</p></td>
@@ -262,31 +268,26 @@
 <section id="descriptions">
 <h2>Descriptions<a class="headerlink" href="#descriptions" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="zuko.transforms.PermutationTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">PermutationTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.PermutationTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L15-L42"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
-<dd><p>Creates a transformation that permutes the elements.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>order</strong> (<em>LongTensor</em>) – The permutation order, with shape <span class="math notranslate nohighlight">\((*, D)\)</span>.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="zuko.transforms.IdentityTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">IdentityTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.IdentityTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L15-L33"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = x\)</span>.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.CosTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">CosTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.CosTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L45-L62"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">CosTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.CosTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L36-L54"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = -\cos(x)\)</span>.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.SinTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">SinTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.SinTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L65-L82"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">SinTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.SinTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L57-L75"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = \sin(x)\)</span>.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.SoftclipTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">SoftclipTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.SoftclipTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L85-L114"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">SoftclipTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.SoftclipTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L78-L107"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a transform that maps <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> to the inverval <span class="math notranslate nohighlight">\([-B, B]\)</span>.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
@@ -294,21 +295,21 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The codomain bound <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<dd class="field-odd"><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The codomain bound <span class="math notranslate nohighlight">\(B\)</span>.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.MonotonicAffineTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicAffineTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicAffineTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L117-L151"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicAffineTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicAffineTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L110-L144"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a transformation <span class="math notranslate nohighlight">\(f(x) = \alpha x + \beta\)</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>shift</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The shift term <span class="math notranslate nohighlight">\(\beta\)</span>, with shape <span class="math notranslate nohighlight">\((*,)\)</span>.</p></li>
-<li><p><strong>scale</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The unconstrained scale factor <span class="math notranslate nohighlight">\(\alpha\)</span>, with shape <span class="math notranslate nohighlight">\((*,)\)</span>.</p></li>
-<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The minimum slope of the transformation.</p></li>
+<li><p><strong>shift</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The shift term <span class="math notranslate nohighlight">\(\beta\)</span>, with shape <span class="math notranslate nohighlight">\((*,)\)</span>.</p></li>
+<li><p><strong>scale</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The unconstrained scale factor <span class="math notranslate nohighlight">\(\alpha\)</span>, with shape <span class="math notranslate nohighlight">\((*,)\)</span>.</p></li>
+<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The minimum slope of the transformation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -316,7 +317,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.MonotonicRQSTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicRQSTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derivatives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicRQSTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L154-L270"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicRQSTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">widths</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heights</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">derivatives</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicRQSTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L147-L263"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a monotonic rational-quadratic spline (RQS) transformation.</p>
 <p class="rubric">References</p>
 <div class="line-block">
@@ -326,11 +327,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>widths</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The unconstrained bin widths, with shape <span class="math notranslate nohighlight">\((*, K)\)</span>.</p></li>
-<li><p><strong>heights</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The unconstrained bin heights, with shape <span class="math notranslate nohighlight">\((*, K)\)</span>.</p></li>
-<li><p><strong>derivatives</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The unconstrained knot derivatives, with shape <span class="math notranslate nohighlight">\((*, K - 1)\)</span>.</p></li>
-<li><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The spline’s (co)domain bound <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
-<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The minimum slope of the transformation.</p></li>
+<li><p><strong>widths</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The unconstrained bin widths, with shape <span class="math notranslate nohighlight">\((*, K)\)</span>.</p></li>
+<li><p><strong>heights</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The unconstrained bin heights, with shape <span class="math notranslate nohighlight">\((*, K)\)</span>.</p></li>
+<li><p><strong>derivatives</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The unconstrained knot derivatives, with shape <span class="math notranslate nohighlight">\((*, K - 1)\)</span>.</p></li>
+<li><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The spline’s (co)domain bound <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p><strong>slope</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The minimum slope of the transformation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -338,15 +339,15 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.MonotonicTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L273-L320"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">MonotonicTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.MonotonicTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L266-L313"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a transformation from a monotonic univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
 <p>The inverse function <span class="math notranslate nohighlight">\(f^{-1}\)</span> is approximated using the bisection method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em>) – A monotonic univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
-<li><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The domain bound <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The absolute tolerance for the inverse transformation.</p></li>
+<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A monotonic univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p><strong>bound</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The domain bound <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
+<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The absolute tolerance for the inverse transformation.</p></li>
 </ul>
 </dd>
 </dl>
@@ -354,20 +355,20 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.UnconstrainedMonotonicTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">UnconstrainedMonotonicTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.UnconstrainedMonotonicTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L323-L365"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">UnconstrainedMonotonicTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.UnconstrainedMonotonicTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L316-L358"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Creates a monotonic transformation <span class="math notranslate nohighlight">\(f(x)\)</span> by integrating a positive
 univariate function <span class="math notranslate nohighlight">\(g(x)\)</span>.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[f(x) = \int_0^x g(t) ~ dt + C\]</div>
+\[f(x) = \int_0^x g(u) ~ du + C\]</div>
 </div>
 <p>The definite integral is estimated by a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Legendre quadrature.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>g</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em>) – A positive univariate function <span class="math notranslate nohighlight">\(g(x)\)</span>.</p></li>
-<li><p><strong>C</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a>) – The integration constant <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
-<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of points <span class="math notranslate nohighlight">\(n\)</span> for the quadrature.</p></li>
+<li><p><strong>g</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A positive univariate function <span class="math notranslate nohighlight">\(g(x)\)</span>.</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The integration constant <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of points <span class="math notranslate nohighlight">\(n\)</span> for the quadrature.</p></li>
 <li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#zuko.transforms.MonotonicTransform" title="zuko.transforms.MonotonicTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">MonotonicTransform</span></code></a>.</p></li>
 </ul>
 </dd>
@@ -375,15 +376,53 @@ univariate function <span class="math notranslate nohighlight">\(g(x)\)</span>.<
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="zuko.transforms.SOSPolynomialTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">SOSPolynomialTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.SOSPolynomialTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L361-L396"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a sum-of-squares (SOS) polynomial transformation.</p>
+<p>The transformation <span class="math notranslate nohighlight">\(f(x)\)</span> is expressed as the primitive integral of the
+sum of <span class="math notranslate nohighlight">\(K\)</span> squared polynomials of degree <span class="math notranslate nohighlight">\(L\)</span>.</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[f(x) = \int_0^x \sum_{i = 1}^K
+\left( 1 + \sum_{j = 0}^L a_{i,j} ~ u^j \right)^2 ~ du + C\]</div>
+</div>
+<p class="rubric">References</p>
+<div class="line-block">
+<div class="line">Sum-of-Squares Polynomial Flow (Jaini et al., 2019)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1905.02325">https://arxiv.org/abs/1905.02325</a></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The polynomial coefficients <span class="math notranslate nohighlight">\(a\)</span>, with shape <span class="math notranslate nohighlight">\((*, K, L + 1)\)</span>.</p></li>
+<li><p><strong>C</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The integration constant <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments passed to <a class="reference internal" href="#zuko.transforms.UnconstrainedMonotonicTransform" title="zuko.transforms.UnconstrainedMonotonicTransform"><code class="xref py py-class docutils literal notranslate"><span class="pre">UnconstrainedMonotonicTransform</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="zuko.transforms.AutoregressiveTransform">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">AutoregressiveTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passes</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.AutoregressiveTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L368-L402"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">AutoregressiveTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">passes</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.AutoregressiveTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L399-L453"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Transform via an autoregressive mapping.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>meta</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.10)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.12)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.12)"><em>Transform</em></a><em>]</em>) – A meta function which returns a transformation <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
-<li><p><strong>passes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The number of passes for the inverse transformation.</p></li>
+<li><p><strong>meta</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/distributions.html#torch.distributions.transforms.Transform" title="(in PyTorch v1.13)"><em>Transform</em></a><em>]</em>) – A meta function which returns a transformation <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+<li><p><strong>passes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of passes for the inverse transformation.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="zuko.transforms.PermutationTransform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zuko.transforms.</span></span><span class="sig-name descname"><span class="pre">PermutationTransform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.transforms.PermutationTransform" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/transforms.py#L456-L483"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Creates a transformation that permutes the elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>order</strong> (<em>LongTensor</em>) – The permutation order, with shape <span class="math notranslate nohighlight">\((*, D)\)</span>.</p>
 </dd>
 </dl>
 </dd></dl>
