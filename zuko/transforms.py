@@ -12,34 +12,25 @@ from typing import *
 from .utils import bisection, broadcast, gauss_legendre
 
 
-class PermutationTransform(Transform):
-    r"""Creates a transformation that permutes the elements.
+class IdentityTransform(Transform):
+    r"""Creates a transformation :math:`f(x) = x`."""
 
-    Arguments:
-        order: The permutation order, with shape :math:`(*, D)`.
-    """
-
-    domain = constraints.real_vector
-    codomain = constraints.real_vector
+    domain = constraints.real
+    codomain = constraints.real
     bijective = True
+    sign = +1
 
-    def __init__(self, order: LongTensor, **kwargs):
-        super().__init__(**kwargs)
-
-        self.order = order
-        self.inverse = torch.argsort(order)
-
-    def __repr__(self) -> str:
-        return f'{self.__class__.__name__}({self.order.tolist()})'
+    def __eq__(self, other: Any) -> bool:
+        return isinstance(other, IdentityTransform)
 
     def _call(self, x: Tensor) -> Tensor:
-        return x[..., self.order]
+        return x
 
     def _inverse(self, y: Tensor) -> Tensor:
-        return y[..., self.inverse]
+        return y
 
     def log_abs_det_jacobian(self, x: Tensor, y: Tensor) -> Tensor:
-        return x.new_zeros(x.shape[:-1])
+        return torch.zeros_like(x)
 
 
 class CosTransform(Transform):
@@ -48,6 +39,7 @@ class CosTransform(Transform):
     domain = constraints.interval(0, math.pi)
     codomain = constraints.interval(-1, 1)
     bijective = True
+    sign = +1
 
     def __eq__(self, other: Any) -> bool:
         return isinstance(other, CosTransform)
@@ -68,6 +60,7 @@ class SinTransform(Transform):
     domain = constraints.interval(-math.pi / 2, math.pi / 2)
     codomain = constraints.interval(-1, 1)
     bijective = True
+    sign = +1
 
     def __eq__(self, other: Any) -> bool:
         return isinstance(other, SinTransform)
@@ -96,7 +89,7 @@ class SoftclipTransform(Transform):
     bijective = True
     sign = +1
 
-    def __init__(self, bound: float = 3.0, **kwargs):
+    def __init__(self, bound: float = 5.0, **kwargs):
         super().__init__(**kwargs)
 
         self.bound = bound
@@ -176,7 +169,7 @@ class MonotonicRQSTransform(Transform):
         widths: Tensor,
         heights: Tensor,
         derivatives: Tensor,
-        bound: float = 3.0,
+        bound: float = 5.0,
         slope: float = 1e-3,
         **kwargs,
     ):
@@ -289,7 +282,7 @@ class MonotonicTransform(Transform):
     def __init__(
         self,
         f: Callable[[Tensor], Tensor],
-        bound: float = 3.0,
+        bound: float = 5.0,
         eps: float = 1e-6,
         **kwargs,
     ):
@@ -324,7 +317,7 @@ class UnconstrainedMonotonicTransform(MonotonicTransform):
     r"""Creates a monotonic transformation :math:`f(x)` by integrating a positive
     univariate function :math:`g(x)`.
 
-    .. math:: f(x) = \int_0^x g(t) ~ dt + C
+    .. math:: f(x) = \int_0^x g(u) ~ du + C
 
     The definite integral is estimated by a :math:`n`-point Gauss-Legendre quadrature.
 
@@ -344,7 +337,7 @@ class UnconstrainedMonotonicTransform(MonotonicTransform):
         self,
         g: Callable[[Tensor], Tensor],
         C: Tensor,
-        n: int = 32,
+        n: int = 16,
         **kwargs,
     ):
         super().__init__(self.f, **kwargs)
@@ -363,6 +356,44 @@ class UnconstrainedMonotonicTransform(MonotonicTransform):
 
     def log_abs_det_jacobian(self, x: Tensor, y: Tensor) -> Tensor:
         return self.g(x).log()
+
+
+class SOSPolynomialTransform(UnconstrainedMonotonicTransform):
+    r"""Creates a sum-of-squares (SOS) polynomial transformation.
+
+    The transformation :math:`f(x)` is expressed as the primitive integral of the
+    sum of :math:`K` squared polynomials of degree :math:`L`.
+
+    .. math:: f(x) = \int_0^x \sum_{i = 1}^K
+        \left( 1 + \sum_{j = 0}^L a_{i,j} ~ u^j \right)^2 ~ du + C
+
+    References:
+        | Sum-of-Squares Polynomial Flow (Jaini et al., 2019)
+        | https://arxiv.org/abs/1905.02325
+
+    Arguments:
+        a: The polynomial coefficients :math:`a`, with shape :math:`(*, K, L + 1)`.
+        C: The integration constant :math:`C`.
+        kwargs: Keyword arguments passed to :class:`UnconstrainedMonotonicTransform`.
+    """
+
+    domain = constraints.real
+    codomain = constraints.real
+    bijective = True
+    sign = +1
+
+    def __init__(self, a: Tensor, C: Tensor, **kwargs):
+        super().__init__(self.g, C, a.shape[-1], **kwargs)
+
+        self.a = a
+        self.i = torch.arange(a.shape[-1]).to(a.device)
+
+    def g(self, x: Tensor) -> Tensor:
+        x = x / self.bound
+        x = x[..., None] ** self.i
+        p = 1 + self.a @ x[..., None]
+
+        return p.squeeze(dim=-1).square().sum(dim=-1)
 
 
 class AutoregressiveTransform(Transform):
@@ -388,8 +419,19 @@ class AutoregressiveTransform(Transform):
         self.meta = meta
         self.passes = passes
 
+        self._cache = None, None
+
     def _call(self, x: Tensor) -> Tensor:
-        return self.meta(x)(x)
+        _x, _f = self._cache
+
+        if x is _x:
+            f = _f
+        else:
+            f = self.meta(x)
+
+        self._cache = x, f
+
+        return f(x)
 
     def _inverse(self, y: Tensor) -> Tensor:
         x = torch.zeros_like(y)
@@ -399,4 +441,43 @@ class AutoregressiveTransform(Transform):
         return x
 
     def log_abs_det_jacobian(self, x: Tensor, y: Tensor) -> Tensor:
-        return self.meta(x).log_abs_det_jacobian(x, y).sum(dim=-1)
+        _x, _f = self._cache
+
+        if x is _x:
+            f = _f
+        else:
+            f = self.meta(x)
+
+        self._cache = x, f
+
+        return f.log_abs_det_jacobian(x, y).sum(dim=-1)
+
+
+class PermutationTransform(Transform):
+    r"""Creates a transformation that permutes the elements.
+
+    Arguments:
+        order: The permutation order, with shape :math:`(*, D)`.
+    """
+
+    domain = constraints.real_vector
+    codomain = constraints.real_vector
+    bijective = True
+
+    def __init__(self, order: LongTensor, **kwargs):
+        super().__init__(**kwargs)
+
+        self.order = order
+        self.inverse = torch.argsort(order)
+
+    def __repr__(self) -> str:
+        return f'{self.__class__.__name__}({self.order.tolist()})'
+
+    def _call(self, x: Tensor) -> Tensor:
+        return x[..., self.order]
+
+    def _inverse(self, y: Tensor) -> Tensor:
+        return y[..., self.inverse]
+
+    def log_abs_det_jacobian(self, x: Tensor, y: Tensor) -> Tensor:
+        return x.new_zeros(x.shape[:-1])

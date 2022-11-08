@@ -7,6 +7,7 @@ __all__ = [
     'MaskedAutoregressiveTransform',
     'MAF',
     'NSF',
+    'SOSPF',
     'NeuralAutoregressiveTransform',
     'UnconstrainedNeuralAutoregressiveTransform',
     'NAF',
@@ -16,6 +17,7 @@ import abc
 import torch
 import torch.nn as nn
 
+from functools import partial
 from math import ceil
 from torch import Tensor, LongTensor, Size
 from typing import *
@@ -225,20 +227,20 @@ class MaskedAutoregressiveTransform(TransformModule):
             f'(order): {order}',
         ])
 
+    def meta(self, y: Tensor, x: Tensor) -> Transform:
+        if y is not None:
+            x = torch.cat(broadcast(x, y, ignore=1), dim=-1)
+
+        params = self.hyper(x)
+        params = params.reshape(*params.shape[:-1], -1, sum(self.sizes))
+
+        args = params.split(self.sizes, dim=-1)
+        args = [a.reshape(a.shape[:-1] + s) for a, s in zip(args, self.shapes)]
+
+        return self.univariate(*args)
+
     def forward(self, y: Tensor = None) -> AutoregressiveTransform:
-        def meta(x: Tensor) -> Transform:
-            if y is not None:
-                x = torch.cat(broadcast(x, y, ignore=1), dim=-1)
-
-            params = self.hyper(x)
-            params = params.reshape(*params.shape[:-1], -1, sum(self.sizes))
-
-            args = params.split(self.sizes, dim=-1)
-            args = [a.reshape(a.shape[:-1] + s) for a, s in zip(args, self.shapes)]
-
-            return self.univariate(*args)
-
-        return AutoregressiveTransform(meta, self.passes)
+        return AutoregressiveTransform(partial(self.meta, y), self.passes)
 
 
 class MAF(FlowModule):
@@ -345,7 +347,7 @@ class NSF(MAF):
 
     Note:
         By default, transformations are fully autoregressive. Coupling transformations
-        can be used by setting :py:`passes=2`.
+        can be obtained by setting :py:`passes=2`.
 
     References:
         | Neural Spline Flows (Durkan et al., 2019)
@@ -373,11 +375,40 @@ class NSF(MAF):
             **kwargs,
         )
 
-        self.transforms.insert(0, Unconditional(SoftclipTransform))
-        self.transforms.append(Unconditional(self.softunclip))
 
-    def softunclip(self) -> Transform:
-        return SoftclipTransform().inv
+class SOSPF(MAF):
+    r"""Creates a sum-of-squares polynomial flow (SOSPF).
+
+    References:
+        | Sum-of-Squares Polynomial Flow (Jaini et al., 2019)
+        | https://arxiv.org/abs/1905.02325
+
+    Arguments:
+        features: The number of features.
+        context: The number of context features.
+        degree: The degree :math:`L` of polynomials.
+        polynomials: The number of polynomials :math:`K`.
+        kwargs: Keyword arguments passed to :class:`MAF`.
+    """
+
+    def __init__(
+        self,
+        features: int,
+        context: int = 0,
+        degree: int = 3,
+        polynomials: int = 2,
+        **kwargs,
+    ):
+        super().__init__(
+            features=features,
+            context=context,
+            univariate=SOSPolynomialTransform,
+            shapes=[(polynomials, degree + 1), ()],
+            **kwargs,
+        )
+
+        for i in reversed(range(len(self.transforms))):
+            self.transforms.insert(i, Unconditional(SoftclipTransform))
 
 
 class NeuralAutoregressiveTransform(MaskedAutoregressiveTransform):
@@ -447,13 +478,13 @@ class NeuralAutoregressiveTransform(MaskedAutoregressiveTransform):
 
         self.network = MonotonicMLP(1 + signal, 1, **network)
 
-    def univariate(self, signal: Tensor) -> Transform:
-        def f(x: Tensor) -> Tensor:
-            return self.network(
-                torch.cat(broadcast(x[..., None], signal, ignore=1), dim=-1)
-            ).squeeze(dim=-1)
+    def f(self, signal: Tensor, x: Tensor) -> Tensor:
+        return self.network(
+            torch.cat(broadcast(x[..., None], signal, ignore=1), dim=-1)
+        ).squeeze(dim=-1)
 
-        return MonotonicTransform(f)
+    def univariate(self, signal: Tensor) -> Transform:
+        return MonotonicTransform(partial(self.f, signal))
 
 
 class UnconstrainedNeuralAutoregressiveTransform(MaskedAutoregressiveTransform):
@@ -527,13 +558,13 @@ class UnconstrainedNeuralAutoregressiveTransform(MaskedAutoregressiveTransform):
         self.integrand = MLP(1 + signal, 1, **network)
         self.integrand.add_module(str(len(self.integrand)), nn.Softplus())
 
-    def univariate(self, signal: Tensor, constant: Tensor) -> Transform:
-        def g(x: Tensor) -> Tensor:
-            return self.integrand(
-                torch.cat(broadcast(x[..., None], signal, ignore=1), dim=-1)
-            ).squeeze(dim=-1)
+    def g(self, signal: Tensor, x: Tensor) -> Tensor:
+        return self.integrand(
+            torch.cat(broadcast(x[..., None], signal, ignore=1), dim=-1)
+        ).squeeze(dim=-1)
 
-        return UnconstrainedMonotonicTransform(g, constant)
+    def univariate(self, signal: Tensor, constant: Tensor) -> Transform:
+        return UnconstrainedMonotonicTransform(partial(self.g, signal), constant)
 
 
 class NAF(FlowModule):

@@ -5,13 +5,13 @@ import torch
 
 from torch import randn
 from zuko.flows import *
-from zuko.transforms import SoftclipTransform
 
 
 def test_flows(tmp_path):
     flows = [
         MAF(3, 5),
         NSF(3, 5),
+        SOSPF(3, 5),
         NAF(3, 5),
         NAF(3, 5, unconstrained=True),
     ]
@@ -36,7 +36,7 @@ def test_flows(tmp_path):
         assert z.shape == (32, 3), flow
 
         # Invertibility
-        x, y = randn(256, 3), randn(5)
+        x, y = randn(256, 3), randn(256, 5)
 
         transforms = [t(y) for t in flow.transforms]
 
@@ -48,7 +48,7 @@ def test_flows(tmp_path):
         for t in reversed(transforms):
             z = t.inv(z)
 
-        assert torch.allclose(x, z, atol=1e-5), flow
+        assert torch.allclose(x, z, atol=1e-4), flow
 
         # Saving
         torch.save(flow, tmp_path / 'flow.pth')
@@ -65,8 +65,6 @@ def test_flows(tmp_path):
 
 
 def test_autoregressive_transforms():
-    softclip = SoftclipTransform()
-
     ATs = [
         MaskedAutoregressiveTransform,
         NeuralAutoregressiveTransform,
@@ -76,34 +74,34 @@ def test_autoregressive_transforms():
     for AT in ATs:
         # Without context
         t = AT(3)
-        x = softclip(randn(3))
+        x = randn(3)
         z = t()(x)
 
         assert z.shape == x.shape, t
         assert z.requires_grad, t
-        assert torch.allclose(t().inv(z), x, atol=1e-5), t
+        assert torch.allclose(t().inv(z), x, atol=1e-4), t
 
         # With context
         t = AT(3, 5)
-        x, y = softclip(randn(256, 3)), randn(5)
+        x, y = randn(256, 3), randn(5)
         z = t(y)(x)
 
         assert z.shape == x.shape, t
         assert z.requires_grad, t
-        assert torch.allclose(t(y).inv(z), x, atol=1e-5), t
+        assert torch.allclose(t(y).inv(z), x, atol=1e-4), t
 
         # Passes
 
         ## Fully autoregressive
         t = AT(7)
-        x = softclip(randn(7))
+        x = randn(7)
         J = torch.autograd.functional.jacobian(t(), x)
 
         assert (torch.triu(J, diagonal=1) == 0).all(), t
 
         ## Coupling
         t = AT(7, passes=2)
-        x = softclip(randn(7))
+        x = randn(7)
         J = torch.autograd.functional.jacobian(t(), x)
 
         assert (torch.triu(J, diagonal=1) == 0).all(), t
