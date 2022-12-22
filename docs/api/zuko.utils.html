@@ -229,13 +229,16 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#zuko.utils.bisection" title="zuko.utils.bisection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bisection</span></code></a></p></td>
-<td><p>Applies the bisection method to find a root <span class="math notranslate nohighlight">\(x\)</span> of a function <span class="math notranslate nohighlight">\(f(x)\)</span> between the bounds <span class="math notranslate nohighlight">\(a\)</span> an <span class="math notranslate nohighlight">\(b\)</span>.</p></td>
+<td><p>Applies the bisection method to find <span class="math notranslate nohighlight">\(x\)</span> between the bounds <span class="math notranslate nohighlight">\(a\)</span> an <span class="math notranslate nohighlight">\(b\)</span> such that <span class="math notranslate nohighlight">\(f_\phi(x)\)</span> is close to <span class="math notranslate nohighlight">\(y\)</span>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#zuko.utils.broadcast" title="zuko.utils.broadcast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">broadcast</span></code></a></p></td>
 <td><p>Broadcasts tensors together.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#zuko.utils.gauss_legendre" title="zuko.utils.gauss_legendre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gauss_legendre</span></code></a></p></td>
-<td><p>Estimates the definite integral of <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span> using a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Legendre quadrature.</p></td>
+<td><p>Estimates the definite integral of a function <span class="math notranslate nohighlight">\(f_\phi(x)\)</span> from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span> using a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Legendre quadrature.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#zuko.utils.odeint" title="zuko.utils.odeint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">odeint</span></code></a></p></td>
+<td><p>Integrates a system of first-order ordinary differential equations (ODEs)</p></td>
 </tr>
 </tbody>
 </table>
@@ -245,26 +248,29 @@
 <h2>Descriptions<a class="headerlink" href="#descriptions" title="Permalink to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="zuko.utils.bisection">
-<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">bisection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.bisection" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L14-L49"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
-<dd><p>Applies the bisection method to find a root <span class="math notranslate nohighlight">\(x\)</span> of a function
-<span class="math notranslate nohighlight">\(f(x)\)</span> between the bounds <span class="math notranslate nohighlight">\(a\)</span> an <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">bisection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.bisection" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L16-L51"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Applies the bisection method to find <span class="math notranslate nohighlight">\(x\)</span> between the bounds <span class="math notranslate nohighlight">\(a\)</span>
+an <span class="math notranslate nohighlight">\(b\)</span> such that <span class="math notranslate nohighlight">\(f_\phi(x)\)</span> is close to <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>Gradients are propagated through <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> via implicit
+differentiation.</p>
 <p class="rubric">Wikipedia</p>
 <p><a class="reference external" href="https://wikipedia.org/wiki/Bisection_method">https://wikipedia.org/wiki/Bisection_method</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
-<li><p><strong>a</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The bound <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(f(a) \leq 0\)</span>.</p></li>
-<li><p><strong>b</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The bound <span class="math notranslate nohighlight">\(b\)</span> such that <span class="math notranslate nohighlight">\(0 \leq f(b)\)</span>.</p></li>
+<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A univariate function <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The target <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The bound <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(f_\phi(a) \leq y\)</span>.</p></li>
+<li><p><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The bound <span class="math notranslate nohighlight">\(b\)</span> such that <span class="math notranslate nohighlight">\(y \leq f_\phi(b)\)</span>.</p></li>
 <li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of iterations.</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The parameters <span class="math notranslate nohighlight">\(\phi\)</span> of <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="go">tensor(1.5708)</span>
 </pre></div>
 </div>
@@ -272,7 +278,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="zuko.utils.broadcast">
-<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">broadcast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.broadcast" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L52-L78"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">broadcast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">tensors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.broadcast" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L100-L126"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
 <dd><p>Broadcasts tensors together.</p>
 <p>The term broadcasting describes how PyTorch treats tensors with different shapes
 during arithmetic operations. In short, if possible, dimensions that have
@@ -296,22 +302,23 @@ different sizes are expanded (without making copies) to be compatible.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="zuko.utils.gauss_legendre">
-<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">gauss_legendre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.gauss_legendre" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L115-L151"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
-<dd><p>Estimates the definite integral of <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(a\)</span> to <span class="math notranslate nohighlight">\(b\)</span>
-using a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Legendre quadrature.</p>
+<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">gauss_legendre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.gauss_legendre" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L129-L158"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Estimates the definite integral of a function <span class="math notranslate nohighlight">\(f_\phi(x)\)</span> from <span class="math notranslate nohighlight">\(a\)</span>
+to <span class="math notranslate nohighlight">\(b\)</span> using a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Legendre quadrature.</p>
 <div class="math-wrapper docutils container">
 <div class="math notranslate nohighlight">
-\[\int_a^b f(x) ~ dx \approx (b - a) \sum_{i = 1}^n w_i f(x_i)\]</div>
+\[\int_a^b f_\phi(x) ~ dx \approx (b - a) \sum_{i = 1}^n w_i f_\phi(x_i)\]</div>
 </div>
 <p class="rubric">Wikipedia</p>
 <p><a class="reference external" href="https://wikipedia.org/wiki/Gauss-Legendre_quadrature">https://wikipedia.org/wiki/Gauss-Legendre_quadrature</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A univariate function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A univariate function <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
 <li><p><strong>a</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The lower limit <span class="math notranslate nohighlight">\(a\)</span>.</p></li>
 <li><p><strong>b</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The upper limit <span class="math notranslate nohighlight">\(b\)</span>.</p></li>
 <li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The number of points <span class="math notranslate nohighlight">\(n\)</span> at which the function is evaluated.</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The parameters <span class="math notranslate nohighlight">\(\phi\)</span> of <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -320,6 +327,53 @@ using a <span class="math notranslate nohighlight">\(n\)</span>-point Gauss-Lege
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="o">-</span><span class="mf">0.69</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gauss_legendre</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="go">tensor(1.4807)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="zuko.utils.odeint">
+<span class="sig-prename descclassname"><span class="pre">zuko.utils.</span></span><span class="sig-name descname"><span class="pre">odeint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#zuko.utils.odeint" title="Permalink to this definition">#</a><a class="reference external" href="https://github.com/francois-rozet/zuko/tree/docs/zuko/utils.py#L239-L284"><span class="viewcode-link"><i class="fa-solid fa-code"></i></span></a></dt>
+<dd><p>Integrates a system of first-order ordinary differential equations (ODEs)</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[\frac{\mathrm{d} x}{\mathrm{d} t} = f_\phi(x, t) ,\]</div>
+</div>
+<p>from <span class="math notranslate nohighlight">\(t_0\)</span> to <span class="math notranslate nohighlight">\(t_1\)</span> using the adaptive Dormand-Prince method. The
+output is the final state</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[x(t_1) = x_0 + \int_{t_0}^{t_1} f_\phi(x(t), t) ~ dt .\]</div>
+</div>
+<p>Gradients are propagated through <span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(t_0\)</span>, <span class="math notranslate nohighlight">\(t_1\)</span> and
+<span class="math notranslate nohighlight">\(\phi\)</span> via the adaptive checkpoint adjoint (ACA) method.</p>
+<p class="rubric">References</p>
+<div class="line-block">
+<div class="line">Neural Ordinary Differential Equations (Chen el al., 2018)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/1806.07366">https://arxiv.org/abs/1806.07366</a></div>
+</div>
+<div class="line-block">
+<div class="line">Adaptive Checkpoint Adjoint Method for Gradient Estimation in Neural ODE (Zhuang et al., 2020)</div>
+<div class="line"><a class="reference external" href="https://arxiv.org/abs/2006.02493">https://arxiv.org/abs/2006.02493</a></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>f</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Callable" title="(in Python v3.11)"><em>Callable</em></a><em>[</em><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – A system of first-order ODEs <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a>) – The initial state <span class="math notranslate nohighlight">\(x_0\)</span>.</p></li>
+<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The initial integration time <span class="math notranslate nohighlight">\(t_0\)</span>.</p></li>
+<li><p><strong>t1</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>, </em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The final integration time <span class="math notranslate nohighlight">\(t_1\)</span>.</p></li>
+<li><p><strong>phi</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.11)"><em>Iterable</em></a><em>[</em><a class="reference external" href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" title="(in PyTorch v1.13)"><em>Tensor</em></a><em>]</em>) – The parameters <span class="math notranslate nohighlight">\(\phi\)</span> of <span class="math notranslate nohighlight">\(f_\phi\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">x</span> <span class="o">@</span> <span class="n">A</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x0</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x1</span>
+<span class="go">tensor([-3.7454, -0.4140,  0.2677])</span>
 </pre></div>
 </div>
 </dd></dl>
